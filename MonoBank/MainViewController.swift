@@ -192,8 +192,12 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		if indexPath.item != 0 {
+			let cell = collectionView.cellForItem(at: indexPath)!
 			let player = BankManager.shared.players[indexPath.item-1]
 			let playerAlertController = UIAlertController(title: "\(player.name): \(BankManager.shared.numberFormatter.string(from: player.balance as NSNumber)!)", message: "What do you want to do with this player?", preferredStyle: .actionSheet)
+			//
+			playerAlertController.popoverPresentationController?.sourceView = cell.contentView
+			playerAlertController.popoverPresentationController?.sourceRect = cell.contentView.frame
 			let quickAddAction = UIAlertAction(title: "Add \(BankManager.shared.numberFormatter.string(from: BankManager.shared.quickAddAmount as NSNumber)!)", style: .default, handler: { action in
 				player.balance += BankManager.shared.quickAddAmount
 				BankManager.shared.save()

@@ -22,6 +22,8 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 		currencySymbolLabel.text = BankManager.shared.currencySymbol
 		balanceTextField.text = String(BankManager.shared.defaultBalance)
 		balanceTextField.placeholder = String(BankManager.shared.defaultBalance)
+		
+		print(tokenCellSize.height)
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -56,10 +58,9 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if indexPath.section == 1 && indexPath.item == 0 {
-			let flowLayout = tokenCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-			let verticalInsets = flowLayout.sectionInset.top+flowLayout.sectionInset.bottom
-			return tokenCollectionView.bounds.height + tableView.layoutMargins.bottom + tableView.layoutMargins.top + verticalInsets
-	
+			// iPhone has two rows, iPad has one row
+			let rowsHeight = UIDevice.current.userInterfaceIdiom == .phone ? tokenCellSize.height*2: tokenCellSize.height
+			return rowsHeight + 30
 		} else {
 			return 44
 		}
@@ -100,10 +101,10 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 	}
 	
 	var tokenCellSize: CGSize {
-		let flowLayout = tokenCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-		let horizintalInsets = flowLayout.sectionInset.left+flowLayout.sectionInset.right
-		let horizontalSpace = horizintalInsets + (flowLayout.minimumInteritemSpacing * 5)
-		let width = (tokenCollectionView.bounds.width-horizontalSpace)/6
+		// iPhone has two rows, iPad has one row
+		let amountOfCellsInRow: CGFloat = UIDevice.current.userInterfaceIdiom == .phone ? 6 : 12
+		let horizontalSpace = 20 + (10 * amountOfCellsInRow - 1)
+		let width = (tableView.bounds.width-horizontalSpace)/amountOfCellsInRow
 		return CGSize(width: width, height: width)
 	}
 	
