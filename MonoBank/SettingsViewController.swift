@@ -63,6 +63,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 				refreshText()
 				let mainViewController = navigationController!.viewControllers.first as! MainViewController
 				mainViewController.playerCollectionView.reloadData()
+				navigationController?.popViewController(animated: true)
 			} else if indexPath.item == 1 {
 				// New Game
 				let warningAlertController = UIAlertController(title: "Are you sure?", message: "By starting a new game you will lose all of your current game data.", preferredStyle: .alert)
