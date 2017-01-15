@@ -120,15 +120,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	/// Returns the number of the playerCell at a given point, -1 for bank
 	func playerForPoint(gestureRecognizer: UIGestureRecognizer) -> Int? {
-		for i in 0..<playerCollectionView.numberOfItems(inSection: 0) {
-			let location = gestureRecognizer.location(in: playerCollectionView.cellForItem(at: IndexPath(item: i, section: 0)))
-			if i == 0 && 0...bankCellSize.width ~= location.x && 0...bankCellSize.height ~= location.y {
-				return -1
-			} else if i > 0 && 0...playerCellSize.width ~= location.x && 0...playerCellSize.height ~= location.y {
-				return i-1
-			}
-		}
-		return nil
+		let item = playerCollectionView.indexPathForItem(at: gestureRecognizer.location(in: playerCollectionView))?.item
+		guard let selectedItem = item else { return nil }
+		return selectedItem - 1
 	}
 	
 	// PlayerCollectionView
