@@ -22,8 +22,6 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 		currencySymbolLabel.text = BankManager.shared.currencySymbol
 		balanceTextField.text = String(BankManager.shared.defaultBalance)
 		balanceTextField.placeholder = String(BankManager.shared.defaultBalance)
-		
-		print(tokenCellSize.height)
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
