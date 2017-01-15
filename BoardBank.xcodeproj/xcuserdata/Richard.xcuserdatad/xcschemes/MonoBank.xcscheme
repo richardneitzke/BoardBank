@@ -17,7 +17,7 @@
                BlueprintIdentifier = "79B78BF51E17E00900181778"
                BuildableName = "BoardBank.app"
                BlueprintName = "BoardBank"
-               ReferencedContainer = "container:MonoBank.xcodeproj">
+               ReferencedContainer = "container:BoardBank.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
             BlueprintIdentifier = "79B78BF51E17E00900181778"
             BuildableName = "BoardBank.app"
             BlueprintName = "BoardBank"
-            ReferencedContainer = "container:MonoBank.xcodeproj">
+            ReferencedContainer = "container:BoardBank.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -58,7 +58,7 @@
             BlueprintIdentifier = "79B78BF51E17E00900181778"
             BuildableName = "BoardBank.app"
             BlueprintName = "BoardBank"
-            ReferencedContainer = "container:MonoBank.xcodeproj">
+            ReferencedContainer = "container:BoardBank.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -77,7 +77,7 @@
             BlueprintIdentifier = "79B78BF51E17E00900181778"
             BuildableName = "BoardBank.app"
             BlueprintName = "BoardBank"
-            ReferencedContainer = "container:MonoBank.xcodeproj">
+            ReferencedContainer = "container:BoardBank.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

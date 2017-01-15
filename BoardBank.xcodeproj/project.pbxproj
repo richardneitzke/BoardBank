@@ -54,7 +54,7 @@
 		79B78BED1E17E00900181778 = {
 			isa = PBXGroup;
 			children = (
-				79B78BF81E17E00900181778 /* MonoBank */,
+				79B78BF81E17E00900181778 /* BoardBank */,
 				79B78BF71E17E00900181778 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,7 +67,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		79B78BF81E17E00900181778 /* MonoBank */ = {
+		79B78BF81E17E00900181778 /* BoardBank */ = {
 			isa = PBXGroup;
 			children = (
 				79B78BF91E17E00900181778 /* AppDelegate.swift */,
@@ -85,6 +85,7 @@
 				79B78C021E17E00900181778 /* LaunchScreen.storyboard */,
 				79B78C051E17E00900181778 /* Info.plist */,
 			);
+			name = BoardBank;
 			path = MonoBank;
 			sourceTree = "<group>";
 		};
@@ -126,7 +127,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 79B78BF11E17E00900181778 /* Build configuration list for PBXProject "MonoBank" */;
+			buildConfigurationList = 79B78BF11E17E00900181778 /* Build configuration list for PBXProject "BoardBank" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -342,7 +343,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		79B78BF11E17E00900181778 /* Build configuration list for PBXProject "MonoBank" */ = {
+		79B78BF11E17E00900181778 /* Build configuration list for PBXProject "BoardBank" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				79B78C061E17E00900181778 /* Debug */,
