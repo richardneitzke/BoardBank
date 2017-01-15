@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MonoBank/MainViewController.swift"
-            timestampString = "506173782.030811"
+            timestampString = "506179134.121844"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "handlePanGesture(panGestureRecognizer:)"
             landmarkType = "7">
             <Locations>
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MonoBank/MainViewController.swift"
-            timestampString = "506174637.728375"
+            timestampString = "506180175.007632"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

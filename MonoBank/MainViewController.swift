@@ -27,10 +27,15 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	var linePath = UIBezierPath()
 	var lineLayer = CAShapeLayer()
 	
+	// Cell that is currently being moved
+	var movingCell: UICollectionViewCell?
+	
 	override func viewDidLoad() {
 		// Configure gestureRecognizer
 		let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(panGestureRecognizer:)))
+		let longPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressGesture))
 		self.view.addGestureRecognizer(panGestureRecognizer)
+		self.view.addGestureRecognizer(longPressGestureRecognizer)
 		
 		// Configure lineLayer
 		lineLayer.lineWidth = 5
@@ -124,6 +129,62 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		guard let selectedItem = item else { return nil }
 		return selectedItem - 1
 	}
+	
+	// Methods that handle moving cells
+	
+	func handleLongPressGesture(gestureRecognizer: UILongPressGestureRecognizer) {
+		let movingIndexPath = playerCollectionView.indexPathForItem(at: gestureRecognizer.location(in: playerCollectionView))
+		switch gestureRecognizer.state {
+		case .began:
+			guard let indexPath = movingIndexPath else { break }
+			guard indexPath.item != 0 else { break }
+			movingCell = playerCollectionView.cellForItem(at: indexPath)
+			UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
+				self.movingCell?.alpha = 0.7
+				self.movingCell?.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+			}, completion: nil)
+			playerCollectionView.beginInteractiveMovementForItem(at: indexPath)
+		case .changed:
+			playerCollectionView.updateInteractiveMovementTargetPosition(gestureRecognizer.location(in: playerCollectionView))
+			movingCell?.alpha = 0.7
+			movingCell?.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+		case .ended:
+			playerCollectionView.endInteractiveMovement()
+			animatePuttingDownCell(cell: movingCell)
+		default:
+			playerCollectionView.cancelInteractiveMovement()
+			animatePuttingDownCell(cell: movingCell)
+		}
+	}
+	
+	// Disable movement of the bank cell
+	func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+		return indexPath.item == 0 ? false : true
+	}
+	
+	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		guard destinationIndexPath.item != 0 else { return }
+		BankManager.shared.players.insert(BankManager.shared.players.remove(at: sourceIndexPath.item-1), at: destinationIndexPath.item-1)
+	}
+	
+	// Disable movement to the bank cell
+	func collectionView(_ collectionView: UICollectionView, targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath, toProposedIndexPath proposedIndexPath: IndexPath) -> IndexPath {
+		if proposedIndexPath.item == 0 {
+			return IndexPath(item: 1, section: 0)
+		} else {
+			return proposedIndexPath
+		}
+	}
+	
+	// By littlebitesofcocoa.com/104-interactive-collection-view-re-ordering
+	func animatePuttingDownCell(cell: UICollectionViewCell?) {
+		UIView.animate(withDuration: 0.1, delay: 0.0, options: [.allowUserInteraction, .beginFromCurrentState], animations: {
+			cell?.alpha = 1.0
+			cell?.transform = CGAffineTransform.identity
+		}, completion: nil)
+	}
+	
+	
 	
 	// PlayerCollectionView
 	
