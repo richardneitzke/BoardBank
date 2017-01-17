@@ -76,7 +76,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			if let fromPlayer = playerForPoint(gestureRecognizer: panGestureRecognizer) {
 				self.fromPlayer = fromPlayer
 				fromPoint = panGestureRecognizer.location(in: view)
-				animateTransactionPop(forPlayer: fromPlayer, active: true)
+				animateCellPop(forPlayer: fromPlayer, active: true)
 				
 			}
 		case .changed:
@@ -90,7 +90,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			
 			// Animate transaction pop of toPlayer
 			guard let potentialToPlayer = playerForPoint(gestureRecognizer: panGestureRecognizer) else {
-				animateTransactionPop(forPlayer: toPlayer, active: false)
+				animateCellPop(forPlayer: toPlayer, active: false)
 				toPlayer = nil
 				return
 			}
@@ -100,8 +100,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			
 			
 			if potentialToPlayer != toPlayer {
-				animateTransactionPop(forPlayer: toPlayer, active: false)
-				animateTransactionPop(forPlayer: potentialToPlayer, active: true)
+				animateCellPop(forPlayer: toPlayer, active: false)
+				animateCellPop(forPlayer: potentialToPlayer, active: true)
 				toPlayer = potentialToPlayer
 			}
 			
@@ -111,8 +111,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			UIView.animate(withDuration: 1, animations: { self.lineLayer.opacity = 0 })
 			
 			// Animate transaction pop
-			animateTransactionPop(forPlayer: fromPlayer, active: false)
-			animateTransactionPop(forPlayer: toPlayer, active: false)
+			animateCellPop(forPlayer: fromPlayer, active: false)
+			animateCellPop(forPlayer: toPlayer, active: false)
 			
 			toPlayer = nil
 			
@@ -161,7 +161,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	/// Animates transaction pop for a player
-	func animateTransactionPop(forPlayer player: Int?, active: Bool) {
+	func animateCellPop(forPlayer player: Int?, active: Bool) {
 		guard let player = player else { return }
 		let cell = playerCollectionView.cellForItem(at: IndexPath(item: player+1, section: 0))
 		let affineTransfrom = active ? CGAffineTransform(scaleX: 1.1, y: 1.1) : CGAffineTransform.identity
