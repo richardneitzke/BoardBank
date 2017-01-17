@@ -84,8 +84,13 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 		let tokenCell = collectionView.dequeueReusableCell(withReuseIdentifier: "tokenCell", for: indexPath) as! TokenCollectionViewCell
-		let tokenName = indexPath.item == selectedToken ? tokens[indexPath.item] + "_filled" : tokens[indexPath.item]
+		let isSelected = indexPath.item == selectedToken
+		let tokenName = isSelected ? tokens[indexPath.item] + "_filled" : tokens[indexPath.item]
 		tokenCell.tokenView.image = UIImage(named: tokenName)!.withRenderingMode(.alwaysTemplate)
+		let affineTransform = isSelected ? CGAffineTransform(scaleX: 1.1, y: 1.1) : CGAffineTransform.identity
+		UIView.animate(withDuration: 0.1, animations: {
+			tokenCell.transform = affineTransform
+		})
 		return tokenCell
 	}
 	
