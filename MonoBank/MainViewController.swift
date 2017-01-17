@@ -19,9 +19,10 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	/// Number of player cells per row
 	var numberOfPlayersPerRow: CGFloat = 2
 	
-	// Variables for the PanGestureRecognizer
+	// Variables for Transactions
 	var fromPoint: CGPoint?
 	var fromPlayer: Int?
+	var toPlayer: Int?
 	
 	// Current path and layer of the transaction line
 	var linePath = UIBezierPath()
@@ -63,7 +64,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	// PanGestureRecognizer
+	// Methods that handle transactions
 	
 	func handlePanGesture(panGestureRecognizer: UIPanGestureRecognizer) {
 		switch panGestureRecognizer.state {
@@ -75,6 +76,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			if let fromPlayer = playerForPoint(gestureRecognizer: panGestureRecognizer) {
 				self.fromPlayer = fromPlayer
 				fromPoint = panGestureRecognizer.location(in: view)
+				animateTransactionPop(forPlayer: fromPlayer, active: true)
+				
 			}
 		case .changed:
 			// Draw line between fromPoint and current location
@@ -84,8 +87,35 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			linePath.addLine(to: panGestureRecognizer.location(in: view))
 			lineLayer.opacity = 1
 			lineLayer.path = linePath.cgPath
+			
+			// Animate transaction pop of toPlayer
+			guard let potentialToPlayer = playerForPoint(gestureRecognizer: panGestureRecognizer) else {
+				animateTransactionPop(forPlayer: toPlayer, active: false)
+				toPlayer = nil
+				return
+			}
+			
+			guard potentialToPlayer != fromPlayer else { return }
+			
+			
+			
+			if potentialToPlayer != toPlayer {
+				animateTransactionPop(forPlayer: toPlayer, active: false)
+				animateTransactionPop(forPlayer: potentialToPlayer, active: true)
+				toPlayer = potentialToPlayer
+			}
+			
+			
 		case .ended:
+			// Animate fade away of transaction line
 			UIView.animate(withDuration: 1, animations: { self.lineLayer.opacity = 0 })
+			
+			// Animate transaction pop
+			animateTransactionPop(forPlayer: fromPlayer, active: false)
+			animateTransactionPop(forPlayer: toPlayer, active: false)
+			
+			toPlayer = nil
+			
 			guard let toPlayer = playerForPoint(gestureRecognizer: panGestureRecognizer),
 				let fromPlayer = fromPlayer, fromPlayer != toPlayer
 				else { return }
@@ -128,6 +158,16 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		let item = playerCollectionView.indexPathForItem(at: gestureRecognizer.location(in: playerCollectionView))?.item
 		guard let selectedItem = item else { return nil }
 		return selectedItem - 1
+	}
+	
+	/// Animates transaction pop for a player
+	func animateTransactionPop(forPlayer player: Int?, active: Bool) {
+		guard let player = player else { return }
+		let cell = playerCollectionView.cellForItem(at: IndexPath(item: player+1, section: 0))
+		let affineTransfrom = active ? CGAffineTransform(scaleX: 1.1, y: 1.1) : CGAffineTransform.identity
+		UIView.animate(withDuration: 0.1, animations: {
+			cell?.transform = affineTransfrom
+		})
 	}
 	
 	// Methods that handle moving cells
