@@ -98,9 +98,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 				return
 			}
 			
-			guard potentialToPlayer != fromPlayer else { return }
-			
-			
+			guard potentialToPlayer != fromPlayer else {
+				animateCellPop(forPlayer: toPlayer, active: false)
+				toPlayer = nil
+				return
+			}
 			
 			if potentialToPlayer != toPlayer {
 				animateCellPop(forPlayer: toPlayer, active: false)
