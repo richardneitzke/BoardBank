@@ -43,6 +43,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		lineLayer.strokeColor = UIColor.gray.cgColor
 		view.layer.addSublayer(lineLayer)
 		
+		// Initialize numberOfPlayersPerRow
+		numberOfPlayersPerRow = UIDevice.current.orientation.isPortrait ? 2 : 3
+		
 		playerNumberChanged()
 	}
 	
@@ -281,7 +284,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		
 		let verticalSpace = verticalInsets + (flowLayout.minimumLineSpacing * ceil(CGFloat(maxPlayers)/numberOfPlayersPerRow))
 		let height = (playerCollectionView.bounds.height-verticalSpace-(playerCollectionView.bounds.height/8))/ceil(CGFloat(maxPlayers)/numberOfPlayersPerRow)
-		
+
 		return CGSize(width: width, height: height)
 	}
 	
@@ -328,15 +331,13 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		}
 	}
 	
-	/// Change the layout after device rotated
-	// FIXME: After rotating back to portrait, cell height becomes a few points too big
+	// Methods required to support landscape
+	
 	override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-		if toInterfaceOrientation.isPortrait {
-			numberOfPlayersPerRow = 2
-		} else {
-			numberOfPlayersPerRow = 3
-		}
-		
+		numberOfPlayersPerRow = toInterfaceOrientation.isPortrait ? 2 : 3
+	}
+	
+	override func viewWillLayoutSubviews() {
 		playerCollectionView.reloadData()
 	}
 	
