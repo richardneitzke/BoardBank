@@ -160,9 +160,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 						BankManager.shared.players[toPlayer].balance += amount
 					}
 				}
-				if BankManager.shared.soundsEnabled { self.audioPlayer.play() }
 				BankManager.shared.save()
 				self.playerCollectionView.reloadData()
+				if BankManager.shared.soundsEnabled { self.audioPlayer.play() }
 			})
 			transactionAlertController.addAction(okAction)
 			let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
