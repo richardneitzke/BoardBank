@@ -61,7 +61,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		playerNumberChanged()
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
+	override func viewWillAppear(_ animated: Bool) {
+		// Refresh numberOfPlayersPerRow
+		numberOfPlayersPerRow = UIDevice.current.orientation.isPortrait ? 2 : 3
 		playerCollectionView.reloadData()
 	}
 	
