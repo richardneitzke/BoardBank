@@ -14,12 +14,14 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 	@IBOutlet var currencyTextField: UITextField!
 	@IBOutlet var defaultBalanceTextField: UITextField!
 	@IBOutlet var quickAddTextField: UITextField!
+	@IBOutlet var soundsEnabledSwitch: UISwitch!
 	
 	@IBOutlet var defaultBalanceCurrencyLabel: UILabel!
 	@IBOutlet var quickAddCurrencyLabel: UILabel!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		soundsEnabledSwitch.isOn = BankManager.shared.soundsEnabled
 		refreshText()
     }
 	
@@ -58,7 +60,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 				if let quickAddAmount = Int(quickAddTextField.text!) {
 					BankManager.shared.quickAddAmount = quickAddAmount
 				}
-				
+				BankManager.shared.soundsEnabled = soundsEnabledSwitch.isOn
 				BankManager.shared.save()
 				refreshText()
 				let mainViewController = navigationController!.viewControllers.first as! MainViewController

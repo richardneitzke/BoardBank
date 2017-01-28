@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -31,6 +32,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	// Cell that is currently being moved
 	var movingCell: UICollectionViewCell?
 	
+	// AudiPlayer for playing the cash register sound
+	var audioPlayer: AVAudioPlayer!
+	
 	override func viewDidLoad() {
 		// Configure gestureRecognizer
 		let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(panGestureRecognizer:)))
@@ -45,6 +49,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		
 		// Initialize numberOfPlayersPerRow
 		numberOfPlayersPerRow = UIDevice.current.orientation.isPortrait ? 2 : 3
+		
+		// Initialize audioPlayer
+		if let soundPath = Bundle.main.path(forResource: "CashRegister", ofType: "mp3") {
+			let soundURL = URL(fileURLWithPath: soundPath)
+			try! audioPlayer = AVAudioPlayer(contentsOf: soundURL)
+		} else {
+			audioPlayer = AVAudioPlayer()
+		}
 		
 		playerNumberChanged()
 	}
@@ -146,6 +158,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 						BankManager.shared.players[toPlayer].balance += amount
 					}
 				}
+				if BankManager.shared.soundsEnabled { self.audioPlayer.play() }
 				BankManager.shared.save()
 				self.playerCollectionView.reloadData()
 			})

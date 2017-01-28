@@ -15,6 +15,7 @@
 		79B78BFF1E17E00900181778 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79B78BFD1E17E00900181778 /* Main.storyboard */; };
 		79B78C011E17E00900181778 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79B78C001E17E00900181778 /* Assets.xcassets */; };
 		79B78C041E17E00900181778 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 79B78C021E17E00900181778 /* LaunchScreen.storyboard */; };
+		79C7D31D1E3CA24E00D4884B /* CashRegister.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 79C7D31C1E3CA24E00D4884B /* CashRegister.mp3 */; };
 		79E3FFC51E1D612500EFD89F /* AddPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E3FFC41E1D612500EFD89F /* AddPlayerViewController.swift */; };
 		79E3FFC71E1D692300EFD89F /* TokenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E3FFC61E1D692300EFD89F /* TokenCollectionViewCell.swift */; };
 		79E3FFC91E1D886A00EFD89F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E3FFC81E1D886A00EFD89F /* SettingsViewController.swift */; };
@@ -33,6 +34,7 @@
 		79B78C001E17E00900181778 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		79B78C031E17E00900181778 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		79B78C051E17E00900181778 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		79C7D31C1E3CA24E00D4884B /* CashRegister.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CashRegister.mp3; sourceTree = "<group>"; };
 		79E3FFC41E1D612500EFD89F /* AddPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPlayerViewController.swift; sourceTree = "<group>"; };
 		79E3FFC61E1D692300EFD89F /* TokenCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenCollectionViewCell.swift; sourceTree = "<group>"; };
 		79E3FFC81E1D886A00EFD89F /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 				79B78BFD1E17E00900181778 /* Main.storyboard */,
 				79ED560C1E1C53EC006247D2 /* CircleView.swift */,
 				79B78C001E17E00900181778 /* Assets.xcassets */,
+				79C7D31C1E3CA24E00D4884B /* CashRegister.mp3 */,
 				79B78C021E17E00900181778 /* LaunchScreen.storyboard */,
 				79B78C051E17E00900181778 /* Info.plist */,
 			);
@@ -151,6 +154,7 @@
 			files = (
 				79B78C041E17E00900181778 /* LaunchScreen.storyboard in Resources */,
 				79B78C011E17E00900181778 /* Assets.xcassets in Resources */,
+				79C7D31D1E3CA24E00D4884B /* CashRegister.mp3 in Resources */,
 				79B78BFF1E17E00900181778 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -33,6 +33,8 @@ class BankManager {
 	/// All players of the current game
 	var players = [Player]()
 	
+	var soundsEnabled = true
+	
 	init() {
 		// Fetch previously set values from UserDefaults
 		if let currencySymbol = UserDefaults.standard.string(forKey: "currencySymbol") {
@@ -46,6 +48,9 @@ class BankManager {
 		}
 		if let playersData = UserDefaults.standard.object(forKey: "players") as? Data {
 			players = NSKeyedUnarchiver.unarchiveObject(with: playersData) as! [Player]
+		}
+		if let soundsEnabled = UserDefaults.standard.object(forKey: "soundsEnabled") as? Bool {
+			self.soundsEnabled = soundsEnabled
 		}
 		
 		// Configure numberFormatter
@@ -61,6 +66,7 @@ class BankManager {
 		UserDefaults.standard.set(quickAddAmount, forKey: "quickAddAmount")
 		let playersData = NSKeyedArchiver.archivedData(withRootObject: players)
 		UserDefaults.standard.set(playersData, forKey: "players")
+		UserDefaults.standard.set(soundsEnabled, forKey: "soundsEnabled")
 	}
 	
 }
