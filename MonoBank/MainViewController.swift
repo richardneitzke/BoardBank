@@ -48,7 +48,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		view.layer.addSublayer(lineLayer)
 		
 		// Initialize numberOfPlayersPerRow
-		numberOfPlayersPerRow = UIDevice.current.orientation.isPortrait ? 2 : 3
+		numberOfPlayersPerRow = UIApplication.shared.statusBarOrientation.isPortrait ? 2 : 3
 		
 		// Initialize audioPlayer
 		if let soundPath = Bundle.main.path(forResource: "CashRegister", ofType: "mp3") {
@@ -63,7 +63,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	override func viewWillAppear(_ animated: Bool) {
 		// Refresh numberOfPlayersPerRow
-		numberOfPlayersPerRow = UIDevice.current.orientation.isPortrait ? 2 : 3
+		numberOfPlayersPerRow = UIApplication.shared.statusBarOrientation.isPortrait ? 2 : 3
 		playerCollectionView.reloadData()
 	}
 	
