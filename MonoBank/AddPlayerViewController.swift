@@ -38,7 +38,7 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 	// TableView
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if indexPath.section == 2 && indexPath.item == 0 {
+		if indexPath.section == 2 && indexPath.row == 0 {
 			let strippedBalance = balanceTextField.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
 			let name = nameTextField.text!.isEmpty ? "Player" : nameTextField.text!
 			let balance = Int(strippedBalance) == nil ? BankManager.shared.defaultBalance : Int(strippedBalance)!
@@ -55,7 +55,7 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		if indexPath.section == 1 && indexPath.item == 0 {
+		if indexPath.section == 1 && indexPath.row == 0 {
 			// iPhone has two rows, iPad has one row
 			let rowsHeight = UIDevice.current.userInterfaceIdiom == .phone ? tokenCellSize.height*2: tokenCellSize.height
 			return rowsHeight + 30
