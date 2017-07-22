@@ -49,7 +49,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if indexPath.section == 1 {
-			if indexPath.row == 0 {
+			if indexPath.item == 0 {
 				// Save Settings
 				if !currencyTextField.text!.isEmpty {
 					BankManager.shared.currencySymbol = currencyTextField.text!
@@ -66,7 +66,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 				let mainViewController = navigationController!.viewControllers.first as! MainViewController
 				mainViewController.playerCollectionView.reloadData()
 				navigationController?.popViewController(animated: true)
-			} else if indexPath.row == 1 {
+			} else if indexPath.item == 1 {
 				// New Game
 				let warningAlertController = UIAlertController(title: "Are you sure?", message: "By starting a new game you will lose all of your current game data.", preferredStyle: .alert)
 				let resetAction = UIAlertAction(title: "New Game", style: .destructive, handler: { action in
@@ -85,11 +85,11 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 		}
 		
 		if indexPath.section == 2 {
-			if indexPath.row == 1 {
+			if indexPath.item == 1 {
 				// Contact
 				let mailURL = URL(string: "mailto:richardneitzke.rn+MonoBank@gmail.com")!
 				UIApplication.shared.openURL(mailURL)
-			} else if indexPath.row == 2 {
+			} else if indexPath.item == 2 {
 				// Icons8
 				let safariVC = SFSafariViewController(url: URL(string: "https://icons8.com")!)
 				present(safariVC, animated: true, completion: nil)
