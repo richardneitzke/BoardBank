@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import CoreData
 
 class MainViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
 
@@ -57,7 +58,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else {
 			audioPlayer = AVAudioPlayer()
 		}
-		
+    
 		playerNumberChanged()
 	}
 	
@@ -66,7 +67,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		numberOfPlayersPerRow = UIApplication.shared.statusBarOrientation.isPortrait ? 2 : 3
 		playerCollectionView.reloadData()
 	}
-	
+    
 	/// Disable/enable addPlayerButton
 	func playerNumberChanged() {
 		if BankManager.shared.players.count < maxPlayers {
@@ -82,7 +83,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	// Methods that handle transactions
-	
 	func handlePanGesture(panGestureRecognizer: UIPanGestureRecognizer) {
 		switch panGestureRecognizer.state {
 		case .began:
@@ -153,14 +153,27 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 				if let amount = Int(strippedInput) {
 					if fromPlayer == -1 {
 						BankManager.shared.players[toPlayer].balance += amount
+                        BankManager.shared.managedUsers[toPlayer].balance += Int16(amount)
+                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
+                        BankManager.shared.saveTransaction(transaction)
+                        BankManager.shared.transactions.append(transaction)
 					} else if toPlayer == -1 {
 						BankManager.shared.players[fromPlayer].balance -= amount
+                        BankManager.shared.managedUsers[fromPlayer].balance -= Int16(amount)
+                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
+                        BankManager.shared.saveTransaction(transaction)
+                        BankManager.shared.transactions.append(transaction)
 					} else {
 						BankManager.shared.players[fromPlayer].balance -= amount
 						BankManager.shared.players[toPlayer].balance += amount
+                        BankManager.shared.managedUsers[fromPlayer].balance -= Int16(amount)
+                        BankManager.shared.managedUsers[toPlayer].balance += Int16(amount)
+                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
+                        BankManager.shared.saveTransaction(transaction)
+                        BankManager.shared.transactions.append(transaction)
 					}
 				}
-				BankManager.shared.save()
+                CoreDataStack.appDelegate.saveContext()
 				self.playerCollectionView.reloadData()
 				if BankManager.shared.soundsEnabled { self.audioPlayer.play() }
 			})
@@ -191,9 +204,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	}
 	
 	// Methods that handle moving cells
-	
 	func handleLongPressGesture(gestureRecognizer: UILongPressGestureRecognizer) {
 		let movingIndexPath = playerCollectionView.indexPathForItem(at: gestureRecognizer.location(in: playerCollectionView))
+        
 		switch gestureRecognizer.state {
 		case .began:
 			guard let indexPath = movingIndexPath else { break }
@@ -205,7 +218,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			}, completion: nil)
 			playerCollectionView.beginInteractiveMovementForItem(at: indexPath)
 		case .changed:
-			playerCollectionView.updateInteractiveMovementTargetPosition(gestureRecognizer.location(in: playerCollectionView))
+            playerCollectionView.updateInteractiveMovementTargetPosition(gestureRecognizer.location(in: playerCollectionView))
 			movingCell?.alpha = 0.7
 			movingCell?.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
 		case .ended:
@@ -243,8 +256,6 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			cell?.transform = CGAffineTransform.identity
 		}, completion: nil)
 	}
-	
-	
 	
 	// PlayerCollectionView
 	
@@ -309,13 +320,14 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		if indexPath.item != 0 {
 			let cell = collectionView.cellForItem(at: indexPath)!
 			let player = BankManager.shared.players[indexPath.item-1]
+            let managedUser = BankManager.shared.managedUsers[indexPath.item-1]
 			let playerAlertController = UIAlertController(title: "\(player.name): \(BankManager.shared.numberFormatter.string(from: player.balance as NSNumber)!)", message: "What do you want to do with this player?", preferredStyle: .actionSheet)
-			//
 			playerAlertController.popoverPresentationController?.sourceView = cell.contentView
 			playerAlertController.popoverPresentationController?.sourceRect = cell.contentView.frame
 			let quickAddAction = UIAlertAction(title: "Add \(BankManager.shared.numberFormatter.string(from: BankManager.shared.quickAddAmount as NSNumber)!)", style: .default, handler: { action in
 				player.balance += BankManager.shared.quickAddAmount
-				BankManager.shared.save()
+                managedUser.balance += Int16(BankManager.shared.quickAddAmount)
+				CoreDataStack.appDelegate.saveContext()
 				collectionView.reloadData()
 			})
 			playerAlertController.addAction(quickAddAction)
@@ -325,7 +337,8 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 				let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
 					if !renameAlertController.textFields!.first!.text!.isEmpty {
 						player.name = renameAlertController.textFields!.first!.text!
-						BankManager.shared.save()
+                        managedUser.name = renameAlertController.textFields!.first!.text!
+						CoreDataStack.appDelegate.saveContext()
 						collectionView.reloadData()
 					}
 				})
@@ -337,7 +350,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			playerAlertController.addAction(renameAction)
 			let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { action in
 				BankManager.shared.players.remove(at: indexPath.item-1)
-				BankManager.shared.save()
+                BankManager.shared.managedUsers.remove(at: indexPath.item-1)
+                CoreDataStack.managedContext.delete(managedUser)
+				CoreDataStack.appDelegate.saveContext()
 				collectionView.reloadData()
 				self.playerNumberChanged()
 			})
@@ -357,6 +372,5 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	override func viewWillLayoutSubviews() {
 		playerCollectionView.reloadData()
 	}
-	
-	
+    
 }

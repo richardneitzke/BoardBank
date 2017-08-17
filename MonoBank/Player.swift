@@ -10,7 +10,7 @@ import Foundation
 
 /// Represents a player of the current game
 
-class Player: NSObject, NSCoding {
+class Player: NSObject {
 	
 	var name: String
 	var balance: Int
@@ -20,22 +20,6 @@ class Player: NSObject, NSCoding {
 		self.name = name
 		self.balance = balance
 		self.token = token
-	}
-	
-	// Methods to conform to NSCoding
-	
-	required convenience init?(coder aDecoder: NSCoder) {
-		guard let name = aDecoder.decodeObject(forKey: "name") as? String,
-			let tokenRawValue = aDecoder.decodeObject(forKey: "token") as? String
-			else { return nil }
-		
-		self.init(name: name, balance: aDecoder.decodeInteger(forKey: "balance"), token: Token(rawValue: tokenRawValue)!)
-	}
-	
-	func encode(with aCoder: NSCoder) {
-		aCoder.encode(name, forKey: "name")
-		aCoder.encode(balance, forKey: "balance")
-		aCoder.encode(token.rawValue, forKey: "token")
 	}
 
 }
