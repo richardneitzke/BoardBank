@@ -63,7 +63,14 @@ class BankManager {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
             let managedContext = appDelegate.persistentContainer.viewContext
         do {
-            let users = try managedContext.fetch(User.fetchRequest()) as [User]
+            
+            let userSortDescriptor = NSSortDescriptor(key: "index", ascending: true)
+            let request: NSFetchRequest<User> = User.fetchRequest()
+            request.sortDescriptors = [userSortDescriptor]
+            
+            let users = try managedContext.fetch(request) as [User]
+            
+            //users.userSortDescriptor = [userSortDescriptor]
             let receipts = try managedContext.fetch(Receipt.fetchRequest()) as [Receipt]
             
             for user in users {
@@ -132,20 +139,13 @@ class BankManager {
     // Work in progress - 8/17/2017
     func saveChangedOrder(_ sourceUser: User, _ destinationUser: User) {
         
-        let destinationFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
-        let sourceUserFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        let destinationUserIndex = destinationUser.index
+        let sourceUserIndex = sourceUser.index
         
-        destinationFetchRequest.predicate = NSPredicate(format: "name = %@", sourceUser.name!)
-        sourceUserFetchRequest.predicate = NSPredicate(format: "name = %@", sourceUser.name!)
+        sourceUser.setValue(destinationUserIndex, forKey: "index")
+        destinationUser.setValue(sourceUserIndex, forKey: "index")
         
-        do {
-            let destination = try CoreDataStack.managedContext.fetch(sourceUserFetchRequest) as! [User]
-            
-        }
-        catch {
-            
-        }
-        
+        CoreDataStack.appDelegate.saveContext()
     }
 	
 }
