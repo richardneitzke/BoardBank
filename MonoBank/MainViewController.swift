@@ -238,6 +238,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 		guard destinationIndexPath.item != 0 else { return }
 		BankManager.shared.players.insert(BankManager.shared.players.remove(at: sourceIndexPath.item-1), at: destinationIndexPath.item-1)
+        BankManager.shared.managedUsers.insert(BankManager.shared.managedUsers.remove(at: sourceIndexPath.item-1), at: destinationIndexPath.item-1)
+        
+        let sourceUser = BankManager.shared.managedUsers[sourceIndexPath.item-1]
+        let destinationUser = BankManager.shared.managedUsers[destinationIndexPath.item-1]
+        BankManager.shared.saveChangedOrder(sourceUser, destinationUser)
 	}
 	
 	// Disable movement to the bank cell

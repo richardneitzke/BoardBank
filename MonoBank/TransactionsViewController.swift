@@ -81,7 +81,7 @@ extension TransactionsViewController: UITabBarDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
         
         let transaction = BankManager.shared.transactions[indexPath.row]
-        cell.textLabel?.text = "\(transaction.payer) payed \(transaction.payee): \(BankManager.shared.numberFormatter.string(from: transaction.amount as NSNumber)!)"
+        cell.textLabel?.text = "\(transaction.payer) paid \(transaction.payee): \(BankManager.shared.numberFormatter.string(from: transaction.amount as NSNumber)!)"
         
         return cell
     }

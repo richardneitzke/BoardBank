@@ -42,6 +42,8 @@ class BankManager {
     
     // All managedReceipts entities of the current game
     var managedReceipts = [Receipt]()
+    
+    var index = Int16(0)
 	
 	var soundsEnabled = true
 	
@@ -90,31 +92,6 @@ class BankManager {
 		numberFormatter.locale = Locale(identifier: "es_CL")
 		numberFormatter.currencySymbol = currencySymbol
 	}
-    
-    //Removes and reloads Players and ManagedUsers
-    func reloadPlayers() {
-        
-        players.removeAll()
-        managedUsers.removeAll()
-        
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-            let managedContext = appDelegate.persistentContainer.viewContext
-            do {
-                let users = try managedContext.fetch(User.fetchRequest()) as [User]
-                
-                for user in users {
-                    let player = Player(name: user.name!, balance: Int(user.balance), token: Token(rawValue: user.token!)!)
-                    players.append(player)
-                    managedUsers.append(user)
-                }
-                
-            }
-            catch let error as NSError{
-                print("Could not fetch. \(error), \(error.userInfo)")
-            }
-        }
-        
-    }
 	
 	//Saves the current settings of the BankManager
 	func saveSettings() {
@@ -131,6 +108,8 @@ class BankManager {
         user.name = player.name
         user.balance = Int16(player.balance)
         user.token = player.token.rawValue
+        user.index += index
+        index += 1
         
         managedUsers.append(user)
         CoreDataStack.appDelegate.saveContext()
@@ -148,6 +127,25 @@ class BankManager {
         
         managedReceipts.append(receipt)
         CoreDataStack.appDelegate.saveContext()
+    }
+    
+    // Work in progress - 8/17/2017
+    func saveChangedOrder(_ sourceUser: User, _ destinationUser: User) {
+        
+        let destinationFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        let sourceUserFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+        
+        destinationFetchRequest.predicate = NSPredicate(format: "name = %@", sourceUser.name!)
+        sourceUserFetchRequest.predicate = NSPredicate(format: "name = %@", sourceUser.name!)
+        
+        do {
+            let destination = try CoreDataStack.managedContext.fetch(sourceUserFetchRequest) as! [User]
+            
+        }
+        catch {
+            
+        }
+        
     }
 	
 }

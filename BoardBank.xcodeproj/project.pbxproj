@@ -22,13 +22,13 @@
 		79ED560B1E1C5113006247D2 /* PlayerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED560A1E1C5113006247D2 /* PlayerCollectionViewCell.swift */; };
 		79ED560D1E1C53EC006247D2 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED560C1E1C53EC006247D2 /* CircleView.swift */; };
 		8C17BF321F42560C009B27C8 /* BoardBankDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF301F42560C009B27C8 /* BoardBankDB.xcdatamodeld */; };
-		8C17BF4F1F436C0F009B27C8 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF4B1F436C0F009B27C8 /* User+CoreDataClass.swift */; };
-		8C17BF501F436C0F009B27C8 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF4C1F436C0F009B27C8 /* User+CoreDataProperties.swift */; };
 		8C17BF541F43F418009B27C8 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF531F43F418009B27C8 /* CoreDataStack.swift */; };
 		8C17BF561F44033A009B27C8 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF551F44033A009B27C8 /* TransactionsViewController.swift */; };
 		8C2C60C71F45111900B3BC20 /* Receipt+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C60C51F45111900B3BC20 /* Receipt+CoreDataClass.swift */; };
 		8C2C60C81F45111900B3BC20 /* Receipt+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C60C61F45111900B3BC20 /* Receipt+CoreDataProperties.swift */; };
 		8C2C60CA1F45115500B3BC20 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C60C91F45115500B3BC20 /* Transaction.swift */; };
+		8C2C60CD1F463F5800B3BC20 /* User+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C60CB1F463F5800B3BC20 /* User+CoreDataClass.swift */; };
+		8C2C60CE1F463F5800B3BC20 /* User+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C60CC1F463F5800B3BC20 /* User+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,13 +49,13 @@
 		79ED560A1E1C5113006247D2 /* PlayerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerCollectionViewCell.swift; sourceTree = "<group>"; };
 		79ED560C1E1C53EC006247D2 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		8C17BF311F42560C009B27C8 /* BoardBankDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BoardBankDB.xcdatamodel; sourceTree = "<group>"; };
-		8C17BF4B1F436C0F009B27C8 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
-		8C17BF4C1F436C0F009B27C8 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8C17BF531F43F418009B27C8 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = MonoBank/CoreDataStack.swift; sourceTree = "<group>"; };
 		8C17BF551F44033A009B27C8 /* TransactionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		8C2C60C51F45111900B3BC20 /* Receipt+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Receipt+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8C2C60C61F45111900B3BC20 /* Receipt+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Receipt+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8C2C60C91F45115500B3BC20 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transaction.swift; path = ../Transaction.swift; sourceTree = "<group>"; };
+		8C2C60CB1F463F5800B3BC20 /* User+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8C2C60CC1F463F5800B3BC20 /* User+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "User+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,10 +73,10 @@
 			isa = PBXGroup;
 			children = (
 				8C17BF531F43F418009B27C8 /* CoreDataStack.swift */,
-				8C17BF4B1F436C0F009B27C8 /* User+CoreDataClass.swift */,
-				8C17BF4C1F436C0F009B27C8 /* User+CoreDataProperties.swift */,
 				8C2C60C51F45111900B3BC20 /* Receipt+CoreDataClass.swift */,
 				8C2C60C61F45111900B3BC20 /* Receipt+CoreDataProperties.swift */,
+				8C2C60CB1F463F5800B3BC20 /* User+CoreDataClass.swift */,
+				8C2C60CC1F463F5800B3BC20 /* User+CoreDataProperties.swift */,
 				79B78BF81E17E00900181778 /* BoardBank */,
 				79B78BF71E17E00900181778 /* Products */,
 			);
@@ -208,20 +208,20 @@
 			files = (
 				79B78BFA1E17E00900181778 /* AppDelegate.swift in Sources */,
 				792B19421E1C19AB003F991D /* Token.swift in Sources */,
-				8C17BF4F1F436C0F009B27C8 /* User+CoreDataClass.swift in Sources */,
 				792B193C1E1C0D20003F991D /* Player.swift in Sources */,
 				79E3FFC91E1D886A00EFD89F /* SettingsViewController.swift in Sources */,
 				8C17BF541F43F418009B27C8 /* CoreDataStack.swift in Sources */,
 				8C2C60C71F45111900B3BC20 /* Receipt+CoreDataClass.swift in Sources */,
 				79B28EB01E1C068300CFA38D /* MainViewController.swift in Sources */,
 				8C2C60CA1F45115500B3BC20 /* Transaction.swift in Sources */,
+				8C2C60CE1F463F5800B3BC20 /* User+CoreDataProperties.swift in Sources */,
+				8C2C60CD1F463F5800B3BC20 /* User+CoreDataClass.swift in Sources */,
 				8C17BF561F44033A009B27C8 /* TransactionsViewController.swift in Sources */,
 				792B19401E1C17C8003F991D /* BankManager.swift in Sources */,
 				79E3FFC71E1D692300EFD89F /* TokenCollectionViewCell.swift in Sources */,
 				8C2C60C81F45111900B3BC20 /* Receipt+CoreDataProperties.swift in Sources */,
 				79E3FFC51E1D612500EFD89F /* AddPlayerViewController.swift in Sources */,
 				79ED560D1E1C53EC006247D2 /* CircleView.swift in Sources */,
-				8C17BF501F436C0F009B27C8 /* User+CoreDataProperties.swift in Sources */,
 				8C17BF321F42560C009B27C8 /* BoardBankDB.xcdatamodeld in Sources */,
 				79ED560B1E1C5113006247D2 /* PlayerCollectionViewCell.swift in Sources */,
 			);
