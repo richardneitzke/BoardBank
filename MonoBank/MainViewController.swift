@@ -330,6 +330,9 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			let quickAddAction = UIAlertAction(title: "Add \(BankManager.shared.numberFormatter.string(from: BankManager.shared.quickAddAmount as NSNumber)!)", style: .default, handler: { action in
 				player.balance += BankManager.shared.quickAddAmount
                 managedUser.balance += Int16(BankManager.shared.quickAddAmount)
+                let transaction = Transaction(amount: BankManager.shared.quickAddAmount, payee: "\(player.name) for passing GO", payeeIndex: indexPath.item-1, payer: "Bank", payerIndex: -1)
+                BankManager.shared.saveTransaction(transaction)
+                BankManager.shared.transactions.append(transaction)
 				CoreDataStack.appDelegate.saveContext()
 				collectionView.reloadData()
 			})
