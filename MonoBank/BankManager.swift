@@ -69,8 +69,6 @@ class BankManager {
             request.sortDescriptors = [userSortDescriptor]
             
             let users = try managedContext.fetch(request) as [User]
-            
-            //users.userSortDescriptor = [userSortDescriptor]
             let receipts = try managedContext.fetch(Receipt.fetchRequest()) as [Receipt]
             
             for user in users {
@@ -136,14 +134,11 @@ class BankManager {
         CoreDataStack.appDelegate.saveContext()
     }
     
-    // Work in progress - 8/17/2017
-    func saveChangedOrder(_ sourceUser: User, _ destinationUser: User) {
+    func saveChangedOrder() {
         
-        let destinationUserIndex = destinationUser.index
-        let sourceUserIndex = sourceUser.index
-        
-        sourceUser.setValue(destinationUserIndex, forKey: "index")
-        destinationUser.setValue(sourceUserIndex, forKey: "index")
+        for i in (0..<managedUsers.count){
+            managedUsers[i].index = Int16(i)
+        }
         
         CoreDataStack.appDelegate.saveContext()
     }
