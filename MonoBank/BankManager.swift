@@ -117,6 +117,11 @@ class BankManager {
         index += 1
         
         managedUsers.append(user)
+        
+        //In case if user moved collectionView cells before adding players
+        for i in (0..<managedUsers.count){
+            managedUsers[i].index = Int16(i)
+        }
         CoreDataStack.appDelegate.saveContext()
     }
     

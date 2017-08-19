@@ -23,10 +23,36 @@ class TransactionsViewController: UIViewController {
     // Transfer money from toPlayer to fromPlayer
     @IBAction func undoButton(_ sender: UIBarButtonItem) {
         
-        let transaction = BankManager.shared.transactions.last
-        let receipt = BankManager.shared.managedReceipts.last
         var newBalance = Int()
+        let receipt = BankManager.shared.managedReceipts.last
+        var shiftedPayerIndex = Int()
+        var shiftedPayeeIndex = Int()
+        let transaction = BankManager.shared.transactions.last
         
+        //Check for nil if banker is present
+        if let payerIndex = BankManager.shared.players.index(where: {$0.name == transaction?.payer}) {
+            shiftedPayerIndex = payerIndex
+        }
+        else {
+            shiftedPayerIndex = -1
+        }
+        
+        if let payeeIndex = BankManager.shared.players.index(where: {$0.name == transaction?.payee}) {
+            shiftedPayeeIndex = payeeIndex
+        }
+        else {
+            shiftedPayeeIndex = -1
+        }
+        
+        //If tokens were moved, update indices
+        if transaction?.payerIndex != shiftedPayerIndex {
+            transaction?.payerIndex = shiftedPayerIndex
+        }
+        if transaction?.payeeIndex != shiftedPayeeIndex{
+            transaction?.payeeIndex = shiftedPayeeIndex
+        }
+        
+        //Undo transactions
         if transaction?.payerIndex == -1 {
             let receivedAmount = transaction?.amount
             let currentPlayerBalance = BankManager.shared.players[(transaction?.payeeIndex)!].balance
