@@ -411,22 +411,30 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="cXX-a7-X7q" style="IBUITableViewCellStyleDefault" id="nrS-4o-Pe5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="transactionCell" textLabel="cXX-a7-X7q" detailTextLabel="aZH-Go-QNm" style="IBUITableViewCellStyleValue1" id="nrS-4o-Pe5">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nrS-4o-Pe5" id="FVZ-l2-tgM">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cXX-a7-X7q">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Player → Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cXX-a7-X7q">
+                                                    <rect key="frame" x="15" y="12" width="117.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="$XXXX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aZH-Go-QNm">
+                                                    <rect key="frame" x="300.5" y="12" width="59.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -434,13 +442,28 @@
                                     <outlet property="delegate" destination="3pu-sG-QBu" id="5nw-Iz-HEA"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OL6-dR-fDG" userLabel="InfoLabel">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <string key="text">YOU HAVE NOT MADE
+ANY TRANSACTIONS YET
+
+DRAG BETWEEN PLAYERS
+TO TRANSFER MONEY</string>
+                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="17"/>
+                                <color key="textColor" red="0.76649132009999998" green="0.76649132009999998" blue="0.76649132009999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="OL6-dR-fDG" firstAttribute="top" secondItem="x7P-UY-GT2" secondAttribute="bottom" id="Y9e-CA-Vim"/>
                             <constraint firstItem="XFa-0p-Qvi" firstAttribute="top" secondItem="x7P-UY-GT2" secondAttribute="bottom" id="agC-Yr-9PJ"/>
                             <constraint firstItem="XFa-0p-Qvi" firstAttribute="leading" secondItem="QzV-Lq-J3b" secondAttribute="leading" id="bf6-kc-W6B"/>
                             <constraint firstItem="CSS-7n-dS1" firstAttribute="top" secondItem="XFa-0p-Qvi" secondAttribute="bottom" id="fcR-tE-Qa6"/>
                             <constraint firstAttribute="trailing" secondItem="XFa-0p-Qvi" secondAttribute="trailing" id="hkD-Bk-uL9"/>
+                            <constraint firstAttribute="bottom" secondItem="OL6-dR-fDG" secondAttribute="bottom" id="nGp-9L-8lM"/>
+                            <constraint firstAttribute="trailing" secondItem="OL6-dR-fDG" secondAttribute="trailing" id="u2R-FV-H6K"/>
+                            <constraint firstItem="OL6-dR-fDG" firstAttribute="leading" secondItem="QzV-Lq-J3b" secondAttribute="leading" id="yQF-4R-YOd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Transactions" id="mVr-6k-XEV">
@@ -451,6 +474,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="infoLabel" destination="OL6-dR-fDG" id="HvP-8o-Yc4"/>
                         <outlet property="transactionsTableView" destination="XFa-0p-Qvi" id="nPb-c4-qJi"/>
                         <outlet property="undoButton" destination="pkP-Sw-A6g" id="6uX-Mn-2Vf"/>
                     </connections>
@@ -482,7 +506,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="bankCell" id="mgV-XE-Fn0">
-                                        <rect key="frame" x="10" y="31" width="355" height="75"/>
+                                        <rect key="frame" x="10" y="10" width="355" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="355" height="75"/>
@@ -514,7 +538,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="playerCell" id="dl5-ye-zt6" customClass="PlayerCollectionViewCell" customModule="BoardBank" customModuleProvider="target">
-                                        <rect key="frame" x="375" y="10" width="172" height="117"/>
+                                        <rect key="frame" x="101.5" y="100" width="172" height="117"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="172" height="117"/>

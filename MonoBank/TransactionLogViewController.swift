@@ -12,7 +12,8 @@ class TransactionLogViewController: UIViewController {
     
     @IBOutlet weak var transactionsTableView: UITableView!
     @IBOutlet weak var undoButton: UIBarButtonItem!
-
+	@IBOutlet var infoLabel: UILabel!
+	
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,20 +124,27 @@ class TransactionLogViewController: UIViewController {
     }
 }
 
-extension TransactionLogViewController: UITabBarDelegate, UITableViewDataSource {
+extension TransactionLogViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return BankManager.shared.transactions.count
+		let transactionCount = BankManager.shared.transactions.count
+		infoLabel.isHidden = transactionCount != 0
+        return transactionCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCell", for: indexPath) as UITableViewCell
         
         let transaction = BankManager.shared.transactions[indexPath.row]
-        cell.textLabel?.text = "\(transaction.payer) paid \(transaction.payee): \(BankManager.shared.numberFormatter.string(from: transaction.amount as NSNumber)!)"
+		cell.textLabel?.text = "\(transaction.payer) → \(transaction.payee)"
+		cell.detailTextLabel?.text = BankManager.shared.numberFormatter.string(from: transaction.amount as NSNumber)!
         
         return cell
     }
+	
+	func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+		return UIView()
+	}
     
 }
