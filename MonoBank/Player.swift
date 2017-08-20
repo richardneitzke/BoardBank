@@ -13,10 +13,10 @@ import Foundation
 class Player: NSObject {
 	
 	var name: String
-	var balance: Int
+	var balance: Int32
 	var token: Token
 	
-	init(name: String, balance: Int, token: Token) {
+	init(name: String, balance: Int32, token: Token) {
 		self.name = name
 		self.balance = balance
 		self.token = token

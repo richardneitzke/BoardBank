@@ -150,24 +150,24 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
 				// Transfer money from fromPlayer to toPlayer
 				let strippedInput = transactionAlertController.textFields!.first!.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-				if let amount = Int(strippedInput) {
+				if let amount = Int32(strippedInput) {
 					if fromPlayer == -1 {
 						BankManager.shared.players[toPlayer].balance += amount
-                        BankManager.shared.managedUsers[toPlayer].balance += Int16(amount)
+                        BankManager.shared.managedUsers[toPlayer].balance += amount
                         let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
                         BankManager.shared.saveTransaction(transaction)
                         BankManager.shared.transactions.append(transaction)
 					} else if toPlayer == -1 {
 						BankManager.shared.players[fromPlayer].balance -= amount
-                        BankManager.shared.managedUsers[fromPlayer].balance -= Int16(amount)
+                        BankManager.shared.managedUsers[fromPlayer].balance -= amount
                         let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
                         BankManager.shared.saveTransaction(transaction)
                         BankManager.shared.transactions.append(transaction)
 					} else {
 						BankManager.shared.players[fromPlayer].balance -= amount
 						BankManager.shared.players[toPlayer].balance += amount
-                        BankManager.shared.managedUsers[fromPlayer].balance -= Int16(amount)
-                        BankManager.shared.managedUsers[toPlayer].balance += Int16(amount)
+                        BankManager.shared.managedUsers[fromPlayer].balance -= amount
+                        BankManager.shared.managedUsers[toPlayer].balance += amount
                         let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
                         BankManager.shared.saveTransaction(transaction)
                         BankManager.shared.transactions.append(transaction)
@@ -329,7 +329,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			playerAlertController.popoverPresentationController?.sourceRect = cell.contentView.frame
 			let quickAddAction = UIAlertAction(title: "Add \(BankManager.shared.numberFormatter.string(from: BankManager.shared.quickAddAmount as NSNumber)!)", style: .default, handler: { action in
 				player.balance += BankManager.shared.quickAddAmount
-                managedUser.balance += Int16(BankManager.shared.quickAddAmount)
+                managedUser.balance += BankManager.shared.quickAddAmount
                 let transaction = Transaction(amount: BankManager.shared.quickAddAmount, payee:player.name, payeeIndex: indexPath.item-1, payer: "Bank", payerIndex: -1)
                 BankManager.shared.saveTransaction(transaction)
                 BankManager.shared.transactions.append(transaction)

@@ -23,7 +23,7 @@ class TransactionsViewController: UIViewController {
     // Transfer money from toPlayer to fromPlayer
     @IBAction func undoButton(_ sender: UIBarButtonItem) {
         
-        var newBalance = Int()
+        var newBalance = Int32()
         let receipt = BankManager.shared.managedReceipts.last
         var shiftedPayerIndex = Int()
         var shiftedPayeeIndex = Int()
@@ -58,16 +58,17 @@ class TransactionsViewController: UIViewController {
         if transaction?.payerIndex == -1 && shiftedPayeeIndex != -1 && shiftedPayerIndex != -1 {
             let receivedAmount = transaction?.amount
             let currentPlayerBalance = BankManager.shared.players[(transaction?.payeeIndex)!].balance
+            
             newBalance = currentPlayerBalance - receivedAmount!
             BankManager.shared.players[(transaction?.payeeIndex)!].balance = newBalance
-            BankManager.shared.managedUsers[(transaction?.payeeIndex)!].balance = Int16(newBalance)
+            BankManager.shared.managedUsers[(transaction?.payeeIndex)!].balance = newBalance
         //If banker was payed
         } else if transaction?.payeeIndex == -1 && shiftedPayeeIndex != -1 && shiftedPayerIndex != -1{
             let receivedAmount = transaction?.amount
             let currentPlayerBalance = BankManager.shared.players[(transaction?.payerIndex)!].balance
             newBalance = currentPlayerBalance + receivedAmount!
             BankManager.shared.players[(transaction?.payerIndex)!].balance = newBalance
-            BankManager.shared.managedUsers[(transaction?.payerIndex)!].balance = Int16(newBalance)
+            BankManager.shared.managedUsers[(transaction?.payerIndex)!].balance = newBalance
         }
         //If both payee and payer exist
           else if shiftedPayeeIndex >= 0 && shiftedPayerIndex >= 0{
@@ -76,10 +77,11 @@ class TransactionsViewController: UIViewController {
             let currentPayerBalance = BankManager.shared.players[(transaction?.payerIndex)!].balance
             let newCurrentPayeeBalance = currentPayeeBalance - receivedAmount!
             let newCurrentPayerBalance = currentPayerBalance + receivedAmount!
+            
             BankManager.shared.players[(transaction?.payeeIndex)!].balance = newCurrentPayeeBalance
             BankManager.shared.players[(transaction?.payerIndex)!].balance = newCurrentPayerBalance
-            BankManager.shared.managedUsers[(transaction?.payeeIndex)!].balance = Int16(newCurrentPayeeBalance)
-            BankManager.shared.managedUsers[(transaction?.payerIndex)!].balance = Int16(newCurrentPayerBalance)
+            BankManager.shared.managedUsers[(transaction?.payeeIndex)!].balance = newCurrentPayeeBalance
+            BankManager.shared.managedUsers[(transaction?.payerIndex)!].balance = newCurrentPayerBalance
         }
         //If payee exists but payer does not
         else if shiftedPayeeIndex >= 0 && shiftedPayerIndex == -1 {
@@ -87,7 +89,7 @@ class TransactionsViewController: UIViewController {
             let currentPayeeBalance = BankManager.shared.players[(transaction?.payeeIndex)!].balance
             let newCurrentPayeeBalance = currentPayeeBalance - receivedAmount!
             BankManager.shared.players[(transaction?.payeeIndex)!].balance = newCurrentPayeeBalance
-            BankManager.shared.managedUsers[(transaction?.payeeIndex)!].balance = Int16(newCurrentPayeeBalance)
+            BankManager.shared.managedUsers[(transaction?.payeeIndex)!].balance = newCurrentPayeeBalance
         }
         //If payer exists but payee does not
         else if shiftedPayeeIndex == -1 && shiftedPayerIndex >= 0   {
@@ -95,7 +97,7 @@ class TransactionsViewController: UIViewController {
             let currentPayerBalance = BankManager.shared.players[(transaction?.payerIndex)!].balance
             let newCurrentPayerBalance = currentPayerBalance + receivedAmount!
             BankManager.shared.players[(transaction?.payerIndex)!].balance = newCurrentPayerBalance
-            BankManager.shared.managedUsers[(transaction?.payerIndex)!].balance = Int16(newCurrentPayerBalance)
+            BankManager.shared.managedUsers[(transaction?.payerIndex)!].balance = newCurrentPayerBalance
         }
         
         // If both shiftedPayeeIndex && shiftedPayerIndex == -1
