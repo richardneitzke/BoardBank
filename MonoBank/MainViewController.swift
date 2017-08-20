@@ -232,7 +232,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	// Disable movement of the bank cell
 	func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-		return indexPath.item == 0 ? false : true
+		return indexPath.item != 0
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
