@@ -1,5 +1,5 @@
 //
-//  TransactionsViewController.swift
+//  TransactionLogViewController.swift
 //  BoardBank
 //
 //  Created by Miguel Tepale on 8/16/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TransactionsViewController: UIViewController {
+class TransactionLogViewController: UIViewController {
     
     @IBOutlet weak var transactionsTableView: UITableView!
     @IBOutlet weak var undoButton: UIBarButtonItem!
@@ -123,7 +123,7 @@ class TransactionsViewController: UIViewController {
     }
 }
 
-extension TransactionsViewController: UITabBarDelegate, UITableViewDataSource {
+extension TransactionLogViewController: UITabBarDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return BankManager.shared.transactions.count

@@ -23,7 +23,7 @@
 		79ED560D1E1C53EC006247D2 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ED560C1E1C53EC006247D2 /* CircleView.swift */; };
 		8C17BF321F42560C009B27C8 /* BoardBankDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF301F42560C009B27C8 /* BoardBankDB.xcdatamodeld */; };
 		8C17BF541F43F418009B27C8 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF531F43F418009B27C8 /* CoreDataStack.swift */; };
-		8C17BF561F44033A009B27C8 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF551F44033A009B27C8 /* TransactionsViewController.swift */; };
+		8C17BF561F44033A009B27C8 /* TransactionLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C17BF551F44033A009B27C8 /* TransactionLogViewController.swift */; };
 		8C2C60C71F45111900B3BC20 /* Receipt+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C60C51F45111900B3BC20 /* Receipt+CoreDataClass.swift */; };
 		8C2C60C81F45111900B3BC20 /* Receipt+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C60C61F45111900B3BC20 /* Receipt+CoreDataProperties.swift */; };
 		8C2C60CA1F45115500B3BC20 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2C60C91F45115500B3BC20 /* Transaction.swift */; };
@@ -50,7 +50,7 @@
 		79ED560C1E1C53EC006247D2 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		8C17BF311F42560C009B27C8 /* BoardBankDB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BoardBankDB.xcdatamodel; sourceTree = "<group>"; };
 		8C17BF531F43F418009B27C8 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
-		8C17BF551F44033A009B27C8 /* TransactionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
+		8C17BF551F44033A009B27C8 /* TransactionLogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionLogViewController.swift; sourceTree = "<group>"; };
 		8C2C60C51F45111900B3BC20 /* Receipt+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Receipt+CoreDataClass.swift"; sourceTree = "<group>"; };
 		8C2C60C61F45111900B3BC20 /* Receipt+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Receipt+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		8C2C60C91F45115500B3BC20 /* Transaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Transaction.swift; path = ../Transaction.swift; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 				79B28EAF1E1C068300CFA38D /* MainViewController.swift */,
 				79E3FFC41E1D612500EFD89F /* AddPlayerViewController.swift */,
 				79E3FFC81E1D886A00EFD89F /* SettingsViewController.swift */,
-				8C17BF551F44033A009B27C8 /* TransactionsViewController.swift */,
+				8C17BF551F44033A009B27C8 /* TransactionLogViewController.swift */,
 				792B193F1E1C17C8003F991D /* BankManager.swift */,
 				792B193B1E1C0D1F003F991D /* Player.swift */,
 				792B19411E1C19AB003F991D /* Token.swift */,
@@ -224,7 +224,7 @@
 				8C2C60CA1F45115500B3BC20 /* Transaction.swift in Sources */,
 				8C2C60CE1F463F5800B3BC20 /* User+CoreDataProperties.swift in Sources */,
 				8C2C60CD1F463F5800B3BC20 /* User+CoreDataClass.swift in Sources */,
-				8C17BF561F44033A009B27C8 /* TransactionsViewController.swift in Sources */,
+				8C17BF561F44033A009B27C8 /* TransactionLogViewController.swift in Sources */,
 				792B19401E1C17C8003F991D /* BankManager.swift in Sources */,
 				79E3FFC71E1D692300EFD89F /* TokenCollectionViewCell.swift in Sources */,
 				8C2C60C81F45111900B3BC20 /* Receipt+CoreDataProperties.swift in Sources */,
