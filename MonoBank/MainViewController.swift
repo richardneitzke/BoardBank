@@ -150,7 +150,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			let okAction = UIAlertAction(title: "OK", style: .default, handler: { action in
 				// Transfer money from fromPlayer to toPlayer
 				let strippedInput = transactionAlertController.textFields!.first!.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-				if let amount = Int32(strippedInput) {
+				if let amount = Int(strippedInput) {
 					if fromPlayer == -1 {
 						BankManager.shared.players[toPlayer].balance += amount
                         BankManager.shared.managedUsers[toPlayer].balance += amount

@@ -40,7 +40,7 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
     //Add player to game
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if indexPath.section == 2 && indexPath.row == 0 {
-			let strippedBalance = Int32(balanceTextField.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
+			let strippedBalance = Int(balanceTextField.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
 			let name = nameTextField.text!.isEmpty ? "Player" : nameTextField.text!
 			let balance = strippedBalance == nil ? BankManager.shared.defaultBalance : strippedBalance!
 			let player = Player(name: name, balance: balance, token: Token(rawValue: tokens[selectedToken])!)

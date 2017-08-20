@@ -16,7 +16,7 @@ extension Receipt {
         return NSFetchRequest<Receipt>(entityName: "Receipt")
     }
 
-    @NSManaged public var amount: Int32
+    @NSManaged public var amount: Int
     @NSManaged public var payee: String?
     @NSManaged public var payeeIndex: Int16
     @NSManaged public var payer: String?

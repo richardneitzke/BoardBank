@@ -23,7 +23,7 @@ class TransactionsViewController: UIViewController {
     // Transfer money from toPlayer to fromPlayer
     @IBAction func undoButton(_ sender: UIBarButtonItem) {
         
-        var newBalance = Int32()
+        var newBalance = 0
         let receipt = BankManager.shared.managedReceipts.last
         var shiftedPayerIndex = Int()
         var shiftedPayeeIndex = Int()

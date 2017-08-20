@@ -26,10 +26,10 @@ class BankManager {
 	}
 	
 	/// Default balance when adding a player
-	var defaultBalance = Int32(1500)
+	var defaultBalance = 1500
 	
 	/// Amount which the user can quickly add in the player menu
-	var quickAddAmount = Int32(200)
+	var quickAddAmount = 200
 	
 	/// All players of the current game
 	var players = [Player]()
@@ -54,10 +54,10 @@ class BankManager {
 			self.currencySymbol = currencySymbol
 		}
 		if let defaultBalance = UserDefaults.standard.value(forKey: "defaultBalance") as? Int {
-			self.defaultBalance = Int32(defaultBalance)
+			self.defaultBalance = Int(defaultBalance)
 		}
         if let quickAddAmount = UserDefaults.standard.value(forKey: "quickAddAmount") as? Int {
-            self.quickAddAmount = Int32(quickAddAmount)
+            self.quickAddAmount = Int(quickAddAmount)
         }
         // Loading Users from core data
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {

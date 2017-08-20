@@ -55,10 +55,10 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 				if !currencyTextField.text!.isEmpty {
 					BankManager.shared.currencySymbol = currencyTextField.text!
 				}
-				if let defaultBalance = Int32(defaultBalanceTextField.text!) {
+				if let defaultBalance = Int(defaultBalanceTextField.text!) {
 					BankManager.shared.defaultBalance = defaultBalance
 				}
-				if let quickAddAmount = Int32(quickAddTextField.text!) {
+				if let quickAddAmount = Int(quickAddTextField.text!) {
 					BankManager.shared.quickAddAmount = quickAddAmount
 				}
 				BankManager.shared.soundsEnabled = soundsEnabledSwitch.isOn
