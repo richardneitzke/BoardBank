@@ -31,14 +31,14 @@ class TransactionLogViewController: UIViewController {
         let transaction = BankManager.shared.transactions.last
         
         //Check for nil if banker is present
-        if let payerIndex = BankManager.shared.players.index(where: {$0.name == transaction?.payer}) {
+        if let payerIndex = BankManager.shared.players.index(where: {$0.id == transaction?.payerId}) {
             shiftedPayerIndex = payerIndex
         }
         else {
             shiftedPayerIndex = -1
         }
         
-        if let payeeIndex = BankManager.shared.players.index(where: {$0.name == transaction?.payee}) {
+        if let payeeIndex = BankManager.shared.players.index(where: {$0.id == transaction?.payeeId}) {
             shiftedPayeeIndex = payeeIndex
         }
         else {

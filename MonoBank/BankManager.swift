@@ -72,13 +72,13 @@ class BankManager {
             let receipts = try managedContext.fetch(Receipt.fetchRequest()) as [Receipt]
             
             for user in users {
-                let player = Player(name: user.name!, balance: user.balance, token: Token(rawValue: user.token!)!)
+                let player = Player(name: user.name!, balance: user.balance, token: Token(rawValue: user.token!)!, id: user.id!)
                 players.append(player)
                 managedUsers.append(user)
             }
             
             for receipt in receipts {
-                let transaction = Transaction(amount: receipt.amount, payee: receipt.payee!, payeeIndex: Int(receipt.payeeIndex), payer: receipt.payer!, payerIndex: Int(receipt.payerIndex))
+                let transaction = Transaction(amount: receipt.amount, payee: receipt.payee!, payeeIndex: Int(receipt.payeeIndex), payeeId: receipt.payeeId!, payer: receipt.payer!, payerIndex: Int(receipt.payerIndex), payerId: receipt.payerId!)
                 transactions.append(transaction)
                 managedReceipts.append(receipt)
             }
@@ -114,6 +114,7 @@ class BankManager {
         user.balance = player.balance
         user.token = player.token.rawValue
         user.index += index
+        user.id = player.id
         index += 1
         
         managedUsers.append(user)
@@ -132,8 +133,10 @@ class BankManager {
         receipt.amount = transaction.amount
         receipt.payee = transaction.payee
         receipt.payeeIndex = Int16(transaction.payeeIndex)
+        receipt.payeeId = transaction.payeeId
         receipt.payer = transaction.payer
         receipt.payerIndex = Int16(transaction.payerIndex)
+        receipt.payerId = transaction.payerId
         
         managedReceipts.append(receipt)
         CoreDataStack.appDelegate.saveContext()

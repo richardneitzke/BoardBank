@@ -11,18 +11,22 @@ import UIKit
 class Transaction: NSObject {
     
     var amount = 0
-    var payee = String()
+    var payee: String
     var payeeIndex = 0
-    var payer = String()
+    var payeeId: String
+    var payer: String
     var payerIndex = 0
+    var payerId: String
     
-    init(amount: Int, payee: String, payeeIndex: Int, payer: String, payerIndex: Int) {
+    init(amount: Int, payee: String, payeeIndex: Int, payeeId: String, payer: String, payerIndex: Int, payerId: String) {
         
         self.amount = amount
         self.payee = payee
         self.payeeIndex = payeeIndex
+        self.payeeId = payeeId
         self.payer = payer
         self.payerIndex = payerIndex
+        self.payerId = payerId
     }
 
 }

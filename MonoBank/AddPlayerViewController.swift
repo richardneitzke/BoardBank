@@ -43,7 +43,8 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 			let strippedBalance = Int(balanceTextField.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
 			let name = nameTextField.text!.isEmpty ? "Player" : nameTextField.text!
 			let balance = strippedBalance == nil ? BankManager.shared.defaultBalance : strippedBalance!
-			let player = Player(name: name, balance: balance, token: Token(rawValue: tokens[selectedToken])!)
+            let uniqueId = NSUUID().uuidString
+			let player = Player(name: name, balance: balance, token: Token(rawValue: tokens[selectedToken])!, id: uniqueId)
 			BankManager.shared.players.append(player)
 			BankManager.shared.saveSettings()
             BankManager.shared.savePlayer(player)

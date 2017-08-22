@@ -2,7 +2,7 @@
 //  User+CoreDataProperties.swift
 //  BoardBank
 //
-//  Created by Miguel Tepale on 8/17/17.
+//  Created by Miguel Tepale on 8/22/17.
 //  Copyright © 2017 Richard Neitzke. All rights reserved.
 //
 
@@ -17,8 +17,9 @@ extension User {
     }
 
     @NSManaged public var balance: Int
+    @NSManaged public var index: Int16
     @NSManaged public var name: String?
     @NSManaged public var token: String?
-    @NSManaged public var index: Int16
+    @NSManaged public var id: String?
 
 }

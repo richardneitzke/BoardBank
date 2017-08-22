@@ -139,8 +139,11 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 				let fromPlayer = fromPlayer, fromPlayer != toPlayer
 				else { return }
 			
-			let fromName = fromPlayer == -1 ? "Bank" : BankManager.shared.players[fromPlayer].name
+            let fromName = fromPlayer == -1 ? "Bank" : BankManager.shared.players[fromPlayer].name
+            let fromNameId = fromName == "Bank" ? "Bank": BankManager.shared.players[fromPlayer].id
+        
 			let toName = toPlayer == -1 ? "Bank" : BankManager.shared.players[toPlayer].name
+            let toNameId = toName == "Bank" ? "Bank": BankManager.shared.players[toPlayer].id
 			
 			let transactionAlertController = UIAlertController(title: "Transfer Money", message: "from \(fromName) to \(toName)", preferredStyle: .alert)
 			transactionAlertController.addTextField(configurationHandler: {
@@ -154,13 +157,13 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 					if fromPlayer == -1 {
 						BankManager.shared.players[toPlayer].balance += amount
                         BankManager.shared.managedUsers[toPlayer].balance += amount
-                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
+                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payeeId: toNameId, payer: fromName, payerIndex: fromPlayer, payerId: fromNameId)
                         BankManager.shared.saveTransaction(transaction)
                         BankManager.shared.transactions.append(transaction)
 					} else if toPlayer == -1 {
 						BankManager.shared.players[fromPlayer].balance -= amount
                         BankManager.shared.managedUsers[fromPlayer].balance -= amount
-                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
+                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payeeId: toNameId, payer: fromName, payerIndex: fromPlayer, payerId: fromNameId)
                         BankManager.shared.saveTransaction(transaction)
                         BankManager.shared.transactions.append(transaction)
 					} else {
@@ -168,7 +171,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 						BankManager.shared.players[toPlayer].balance += amount
                         BankManager.shared.managedUsers[fromPlayer].balance -= amount
                         BankManager.shared.managedUsers[toPlayer].balance += amount
-                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payer: fromName, payerIndex: fromPlayer)
+                        let transaction = Transaction(amount: amount, payee: toName, payeeIndex: toPlayer, payeeId: toNameId, payer: fromName, payerIndex: fromPlayer, payerId: fromNameId)
                         BankManager.shared.saveTransaction(transaction)
                         BankManager.shared.transactions.append(transaction)
 					}
@@ -330,7 +333,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 			let quickAddAction = UIAlertAction(title: "Add \(BankManager.shared.numberFormatter.string(from: BankManager.shared.quickAddAmount as NSNumber)!)", style: .default, handler: { action in
 				player.balance += BankManager.shared.quickAddAmount
                 managedUser.balance += BankManager.shared.quickAddAmount
-                let transaction = Transaction(amount: BankManager.shared.quickAddAmount, payee:player.name, payeeIndex: indexPath.item-1, payer: "Bank", payerIndex: -1)
+                let transaction = Transaction(amount: BankManager.shared.quickAddAmount, payee:player.name, payeeIndex: indexPath.item-1, payeeId: player.id, payer: "Bank", payerIndex: -1, payerId: "Bank")
                 BankManager.shared.saveTransaction(transaction)
                 BankManager.shared.transactions.append(transaction)
 				CoreDataStack.appDelegate.saveContext()
