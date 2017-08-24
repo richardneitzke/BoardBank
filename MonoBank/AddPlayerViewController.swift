@@ -37,18 +37,47 @@ class AddPlayerViewController: UITableViewController, UITextFieldDelegate, UICol
 	
 	// TableView
 	
+    //Add player to game
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		if indexPath.section == 2 && indexPath.row == 0 {
-			let strippedBalance = balanceTextField.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+			let strippedBalance = Int(balanceTextField.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
 			let name = nameTextField.text!.isEmpty ? "Player" : nameTextField.text!
-			let balance = Int(strippedBalance) == nil ? BankManager.shared.defaultBalance : Int(strippedBalance)!
-			let player = Player(name: name, balance: balance, token: Token(rawValue: tokens[selectedToken])!)
+			let balance = strippedBalance == nil ? BankManager.shared.defaultBalance : strippedBalance!
+            let uniqueId = NSUUID().uuidString
+			let player = Player(name: name, balance: balance, token: Token(rawValue: tokens[selectedToken])!, id: uniqueId)
 			BankManager.shared.players.append(player)
-			BankManager.shared.save()
-			let mainViewController = navigationController?.viewControllers.first as! MainViewController
-			mainViewController.playerCollectionView.reloadData()
-			mainViewController.playerNumberChanged()
-			navigationController?.popViewController(animated: true)
+            var lastPlayerIndex = 1
+            for inGamePlayer in BankManager.shared.players {
+                if BankManager.shared.players.count == 1 {
+                    BankManager.shared.saveSettings()
+                    BankManager.shared.savePlayer(player)
+                    let mainViewController = navigationController?.viewControllers.first as! MainViewController
+                    mainViewController.playerCollectionView.reloadData()
+                    mainViewController.playerNumberChanged()
+                    navigationController?.popViewController(animated: true)
+                    break
+                } else if inGamePlayer.token.rawValue == player.token.rawValue {
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    BankManager.shared.players.remove(at:  BankManager.shared.players.count-1)
+                    //Alert user to pick a different token
+                    let alertController = UIAlertController(title: "Hello!", message: "This token has already been selected. Please choose another token.", preferredStyle: .alert)
+                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action:UIAlertAction!) in
+                    }
+                    alertController.addAction(OKAction)
+                    present(alertController, animated: true, completion:nil)
+                    return
+                } else if lastPlayerIndex == BankManager.shared.players.count-1 {
+                    BankManager.shared.saveSettings()
+                    BankManager.shared.savePlayer(player)
+                    let mainViewController = navigationController?.viewControllers.first as! MainViewController
+                    mainViewController.playerCollectionView.reloadData()
+                    mainViewController.playerNumberChanged()
+                    navigationController?.popViewController(animated: true)
+                    tableView.deselectRow(at: indexPath, animated: true)
+                    break
+                }
+                lastPlayerIndex += 1
+            }
 		}
 		
 		tableView.deselectRow(at: indexPath, animated: true)

@@ -6,6 +6,7 @@
 //  Copyright © 2017 Richard Neitzke. All rights reserved.
 //
 
+import CoreData
 import UIKit
 import SafariServices
 
@@ -61,7 +62,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 					BankManager.shared.quickAddAmount = quickAddAmount
 				}
 				BankManager.shared.soundsEnabled = soundsEnabledSwitch.isOn
-				BankManager.shared.save()
+				BankManager.shared.saveSettings()
 				refreshText()
 				let mainViewController = navigationController!.viewControllers.first as! MainViewController
 				mainViewController.playerCollectionView.reloadData()
@@ -71,7 +72,21 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 				let warningAlertController = UIAlertController(title: "Are you sure?", message: "By starting a new game you will lose all of your current game data.", preferredStyle: .alert)
 				let resetAction = UIAlertAction(title: "New Game", style: .destructive, handler: { action in
 					BankManager.shared.players = [Player]()
-					BankManager.shared.save()
+                    BankManager.shared.transactions = [Transaction]()
+                    let userFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+                    let userDeleteRequest = NSBatchDeleteRequest(fetchRequest: userFetchRequest)
+                    let receiptFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Receipt")
+                    let receiptDeleteRequest = NSBatchDeleteRequest(fetchRequest: receiptFetchRequest)
+                    
+                    do {
+                        try CoreDataStack.managedContext.execute(userDeleteRequest)
+                        try CoreDataStack.managedContext.execute(receiptDeleteRequest)
+                    } catch let error as NSError {
+                        print("Could not delete entities. \(error), \(error.userInfo)")
+                    }
+					BankManager.shared.managedUsers = [User]()
+                    BankManager.shared.managedReceipts = [Receipt]()
+                    CoreDataStack.appDelegate.saveContext()
 					let mainViewController = self.navigationController?.viewControllers.first as! MainViewController
 					mainViewController.playerCollectionView.reloadData()
 					mainViewController.playerNumberChanged()
@@ -88,7 +103,7 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 			if indexPath.row == 1 {
 				// Contact
 				let mailURL = URL(string: "mailto:richardneitzke.rn+MonoBank@gmail.com")!
-				UIApplication.shared.openURL(mailURL)
+                UIApplication.shared.open(mailURL, options: [:], completionHandler: nil)
 			} else if indexPath.row == 2 {
 				// Icons8
 				let safariVC = SFSafariViewController(url: URL(string: "https://icons8.com")!)
@@ -98,7 +113,5 @@ class SettingsViewController: UITableViewController, UITextFieldDelegate {
 		
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
-
-
 
 }
