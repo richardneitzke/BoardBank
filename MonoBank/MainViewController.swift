@@ -80,6 +80,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 		} else {
 			infoLabel.isHidden = false
 		}
+        
 	}
 	
 	// Methods that handle transactions
