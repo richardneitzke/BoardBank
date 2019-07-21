@@ -83,7 +83,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	// Methods that handle transactions
 	
-	func handlePanGesture(panGestureRecognizer: UIPanGestureRecognizer) {
+    @objc func handlePanGesture(panGestureRecognizer: UIPanGestureRecognizer) {
 		switch panGestureRecognizer.state {
 		case .began:
 			// New line, reset fromPlayer and fromPoint
@@ -192,7 +192,7 @@ class MainViewController: UIViewController, UICollectionViewDataSource, UICollec
 	
 	// Methods that handle moving cells
 	
-	func handleLongPressGesture(gestureRecognizer: UILongPressGestureRecognizer) {
+    @objc func handleLongPressGesture(gestureRecognizer: UILongPressGestureRecognizer) {
 		let movingIndexPath = playerCollectionView.indexPathForItem(at: gestureRecognizer.location(in: playerCollectionView))
 		switch gestureRecognizer.state {
 		case .began:
