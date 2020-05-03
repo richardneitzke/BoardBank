@@ -1,3 +1,7 @@
+### Warning!
+This is an old project. It does contain a lot of bad code I wrote when I started out with iOS Development. I am not mantaining this project anymore and it is only here for historic reasons.
+<br/><br/><br/>
+
 <div align="center">
 <img width=250 src ="http://i.imgur.com/NTfzccd.png" />
 
